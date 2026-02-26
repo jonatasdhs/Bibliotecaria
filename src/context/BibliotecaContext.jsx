@@ -15,7 +15,7 @@ export function BibliotecaProvider({ children }) {
     categoria: l.categoria, ano: l.ano, quantidade: l.quantidade, disponivel: l.disponivel,
   });
   const mapMembro = (m) => ({
-    id: m.id, nome: m.nome, email: m.email, telefone: m.telefone,
+    id: m.id, nome: m.nome, matricula: m.matricula, telefone: m.telefone,
     cpf: m.cpf, dataRegistro: m.data_registro, ativo: m.ativo,
   });
   const mapEmprestimo = (e) => ({
@@ -70,7 +70,7 @@ export function BibliotecaProvider({ children }) {
   // Membros
   const adicionarMembro = async (membro) => {
     const { data, error } = await supabase.from('membros').insert([{
-      nome: membro.nome, email: membro.email, telefone: membro.telefone,
+      nome: membro.nome, matricula: membro.matricula, telefone: membro.telefone,
       cpf: membro.cpf, data_registro: new Date().toISOString().split('T')[0], ativo: true,
     }]).select().single();
     if (!error) setMembros(prev => [...prev, mapMembro(data)]);
@@ -79,7 +79,7 @@ export function BibliotecaProvider({ children }) {
   const editarMembro = async (id, dados) => {
     const payload = {};
     if (dados.nome !== undefined) payload.nome = dados.nome;
-    if (dados.email !== undefined) payload.email = dados.email;
+    if (dados.matricula !== undefined) payload.matricula = dados.matricula;
     if (dados.telefone !== undefined) payload.telefone = dados.telefone;
     if (dados.cpf !== undefined) payload.cpf = dados.cpf;
     if (dados.ativo !== undefined) payload.ativo = dados.ativo;

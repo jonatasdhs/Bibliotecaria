@@ -5,7 +5,7 @@ import Modal from '../components/Modal';
 
 function FormMembro({ inicial, onSalvar, onCancelar }) {
   const [form, setForm] = useState(inicial || {
-    nome: '', email: '', telefone: '', cpf: '', ativo: true,
+    nome: '', matricula: '', telefone: '', cpf: '', ativo: true,
   });
 
   const set = (campo, valor) => setForm(prev => ({ ...prev, [campo]: valor }));
@@ -29,14 +29,12 @@ function FormMembro({ inicial, onSalvar, onCancelar }) {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">E-mail *</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Matrícula</label>
           <input
-            required
-            type="email"
-            value={form.email}
-            onChange={e => set('email', e.target.value)}
+            value={form.matricula}
+            onChange={e => set('matricula', e.target.value)}
             className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            placeholder="email@exemplo.com"
+            placeholder="Número de matrícula"
           />
         </div>
         <div>
@@ -91,7 +89,7 @@ export default function Membros() {
   const membrosFiltrados = membros.filter(m => {
     const matchBusca = !busca ||
       m.nome.toLowerCase().includes(busca.toLowerCase()) ||
-      m.email.toLowerCase().includes(busca.toLowerCase()) ||
+      m.matricula?.toLowerCase().includes(busca.toLowerCase()) ||
       m.cpf?.includes(busca);
     const matchAtivo = filtroAtivo === '' ? true : filtroAtivo === 'ativo' ? m.ativo : !m.ativo;
     return matchBusca && matchAtivo;
@@ -146,7 +144,7 @@ export default function Membros() {
           <input
             value={busca}
             onChange={e => setBusca(e.target.value)}
-            placeholder="Buscar por nome, e-mail ou CPF..."
+            placeholder="Buscar por nome, matrícula ou CPF..."
             className="w-full pl-9 pr-4 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
@@ -205,7 +203,7 @@ export default function Membros() {
                 </div>
 
                 <div className="space-y-1 text-sm text-gray-500">
-                  <p className="truncate">✉ {membro.email}</p>
+                  {membro.matricula && <p className="truncate">🎓 {membro.matricula}</p>}
                   {membro.telefone && <p>📞 {membro.telefone}</p>}
                   {membro.cpf && <p>🪪 {membro.cpf}</p>}
                 </div>

@@ -17,7 +17,7 @@ create table if not exists livros (
 create table if not exists membros (
   id bigint primary key generated always as identity,
   nome text not null,
-  email text not null,
+  matricula text,
   telefone text,
   cpf text,
   data_registro date default current_date,
@@ -55,8 +55,8 @@ insert into livros (titulo, autor, isbn, categoria, ano, quantidade, disponivel)
   ('Clean Code', 'Robert C. Martin', '978-0-13-235088-4', 'Tecnologia', 2008, 3, 3),
   ('A Revolução dos Bichos', 'George Orwell', '978-85-7547-243-3', 'Ficção', 1945, 2, 2);
 
-insert into membros (nome, email, telefone, cpf, data_registro, ativo) values
-  ('Ana Silva', 'ana.silva@email.com', '(11) 99999-1111', '123.456.789-00', '2024-01-15', true),
-  ('Carlos Souza', 'carlos.souza@email.com', '(11) 99999-2222', '987.654.321-00', '2024-02-20', true),
-  ('Maria Oliveira', 'maria.oliveira@email.com', '(11) 99999-3333', '456.789.123-00', '2024-03-10', true),
-  ('João Lima', 'joao.lima@email.com', '(11) 99999-4444', '321.654.987-00', '2024-04-05', false);
+insert into membros (nome, matricula, telefone, cpf, data_registro, ativo) values
+  ('Ana Silva', '2024001', '(11) 99999-1111', '123.456.789-00', '2024-01-15', true),
+  ('Carlos Souza', '2024002', '(11) 99999-2222', '987.654.321-00', '2024-02-20', true),
+  ('Maria Oliveira', '2024003', '(11) 99999-3333', '456.789.123-00', '2024-03-10', true),
+  ('João Lima', '2024004', '(11) 99999-4444', '321.654.987-00', '2024-04-05', false);
